@@ -36,6 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.6
   introduction_screen: ^4.0.0
+  easy_localization: ^3.0.8
+  toggle_switch: ^2.0.0
+  google_fonts: ^6.3.1
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +60,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
