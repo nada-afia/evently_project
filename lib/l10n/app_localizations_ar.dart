@@ -89,4 +89,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get introText4 =>
       'اجعل كل فعالية ذكرى لا تُنسى بمشاركتها مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء، وإبقاء الجميع على اطلاع، والاحتفال باللحظات معًا. التقط وشارك الحماس مع شبكتك لتستعيد أبرز اللحظات وتحتفظ بالذكريات.';
+
+  @override
+  String get or => 'أو';
 }

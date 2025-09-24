@@ -1,4 +1,5 @@
 
+import 'package:evently_app/evently/custom_language_toggle_switch.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/provider/app_them_provider.dart';
 import 'package:evently_app/utilts/app_styles.dart';
@@ -28,11 +29,11 @@ class BeforIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<AppThemProvider>(context);
     var languageProvider=Provider.of<AppLanguageProvider>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColors.primarybackground,
      body:  Padding(
           padding: EdgeInsets.symmetric(horizontal: height*0.02),
           child: Column(
@@ -61,7 +62,7 @@ class BeforIntro extends StatelessWidget {
                 Text(
                   AppLocalizations.of(context)!.introText1,
                   textAlign: TextAlign.left,
-                  style: AppStyles.blackMed16,
+                  style: !themeProvider.isDark()?AppStyles.blackMed16:AppStyles.beigeMed16,
                 ),
                 SizedBox(height: height * 0.03),
                 Row(
@@ -71,7 +72,7 @@ class BeforIntro extends StatelessWidget {
                       style: AppStyles.blueMed20,
                     ),
                     Spacer(),
-                    buildbutton(first: AppImages.usa, second: AppImages.egypt, context: context,isLanguage: true)
+                   CustomToggleSwitch()
                   ],
                 ),
                 SizedBox(height: height * 0.03),
@@ -112,14 +113,15 @@ class BeforIntro extends StatelessWidget {
     required String first,
     required String second,
     required BuildContext context,
-    bool isLanguage = false, // علشان نفرق بين اللغة والثيم
   }) {
+    final themeProvider = context.watch<AppThemProvider>();
+
     return ToggleSwitch(
       borderWidth: 3,
       minWidth: 50.0,
       radiusStyle: true,
-      inactiveBgColor: AppColors.white,
-      initialLabelIndex: 0,
+      inactiveBgColor: AppColors.transparent,
+      initialLabelIndex: themeProvider.appThem == ThemeMode.light ? 0 : 1,
       cornerRadius: 30.0,
       borderColor: [AppColors.blue],
       activeBgColor: [AppColors.blue],
@@ -129,22 +131,14 @@ class BeforIntro extends StatelessWidget {
         Image.asset(second),
       ],
       onToggle: (index) {
-        if (isLanguage) {
-          if (index == 0) {
-            context.read<AppLanguageProvider>().changeLanguage("en");
-          } else {
-            context.read<AppLanguageProvider>().changeLanguage("ar");
-          }
+        if (index == 0) {
+          themeProvider.changeThem(ThemeMode.light);
         } else {
-          if(index==0){
-            context.read<AppThemProvider>().changeThem(ThemeMode.light);
-          }
-          else{
-            context.read<AppThemProvider>().changeThem(ThemeMode.dark);
-          }
+          themeProvider.changeThem(ThemeMode.dark);
         }
       },
     );
-  }
+
+}
 
 }
