@@ -1,4 +1,6 @@
- import 'package:evently_app/evently/befor_intro.dart';
+ import 'package:evently_app/auth/login/create_account.dart';
+import 'package:evently_app/auth/login/forget_password.dart';
+import 'package:evently_app/evently/befor_intro.dart';
 import 'package:evently_app/evently/intro_screen.dart';
 import 'package:evently_app/auth/login/login_screen.dart';
 import 'package:evently_app/provider/app_language_provider.dart';
@@ -12,8 +14,10 @@ import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
 
 void main(){
-  runApp(MultiProvider(providers: [ChangeNotifierProvider(create: (context) =>AppLanguageProvider() ,),
-  ChangeNotifierProvider(create: (context) => AppThemProvider(),)],
+  runApp(MultiProvider(providers:[
+  ChangeNotifierProvider(create: (context) => AppThemProvider(),),
+    ChangeNotifierProvider(create: (context) =>AppLanguageProvider() ,),
+  ],
   child: MyApp()));
  }
  class MyApp extends StatelessWidget {
@@ -22,7 +26,7 @@ void main(){
    @override
    Widget build(BuildContext context) {
      var languageProvider=Provider.of<AppLanguageProvider>(context);
-     var themProvider=Provider.of<AppThemProvider>(context);
+     var themeProvider = Provider.of<AppThemProvider>(context);
      return MaterialApp(
        debugShowCheckedModeBanner: false,
        localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -32,11 +36,12 @@ void main(){
          AppRoutes.beforIntro: (context) => BeforIntro(),
          AppRoutes.introRoute: (context) => IntroScreen(),
          AppRoutes.login: (context) => LoginScreen(),
+         AppRoutes.forgetScreen: (context) => ForgetPassword(),
+       AppRoutes.createScreen:(context)=>CreateAccount(),
        },
        locale:Locale(languageProvider.appLanguage),
-      theme: AppThem.lightMode,
-      darkTheme: AppThem.darkMode,
-       themeMode: themProvider.appThem,
-     );
-   }
+       theme: AppThem.lightMode,
+       darkTheme: AppThem.darkMode,
+       themeMode: themeProvider.appThem,
+     );}
  }

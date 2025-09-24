@@ -34,80 +34,79 @@ class BeforIntro extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-     body:  Padding(
-          padding: EdgeInsets.symmetric(horizontal: height*0.02),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Image.asset(AppImages.introLogo, width: width * 0.40,
-                    height: height * 0.06,),
-                ),
-                SizedBox(height: height*0.04,),
-                Center(
-                  child: Image.asset(
-                    AppImages.beingCreative,
-                    width: width * 0.91,
-                    height: height * 0.43,
+     body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: height*0.02),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image.asset(AppImages.introLogo, width: width * 0.40,
+                      height: height * 0.06,),
                   ),
-                ),
-                SizedBox(height: height * 0.02),
-                Text(
-                  AppLocalizations.of(context)!.personalizeYourExperience,
-                  textAlign: TextAlign.left,
-                  style: AppStyles.blueMed20,
-                ),
-
-                SizedBox(height: height * 0.02),
-                Text(
-                  AppLocalizations.of(context)!.introText1,
-                  textAlign: TextAlign.left,
-                  style: !themeProvider.isDark()?AppStyles.blackMed16:AppStyles.beigeMed16,
-                ),
-                SizedBox(height: height * 0.03),
-                Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.language,
-                      style: AppStyles.blueMed20,
+                  SizedBox(height: height*0.04,),
+                  Center(
+                    child: Image.asset(
+                      AppImages.beingCreative,
+                      width: width * 0.91,
+                      height: height * 0.43,
                     ),
-                    Spacer(),
-                   CustomToggleSwitch()
-                  ],
-                ),
-                SizedBox(height: height * 0.03),
-                Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.theme,
-                      style: AppStyles.blueMed20,
-                    ),
-                    Spacer(),
-                    buildbutton(first: AppImages.sunImage, second: AppImages.moonImage, context: context)
-                  ],
-                ),
-                SizedBox(height: height*0.02,),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                  ),
+                  SizedBox(height: height * 0.02),
+                  Text(
+                    AppLocalizations.of(context)!.personalizeYourExperience,
+                    textAlign: TextAlign.left,
+                    style: AppStyles.blueMed20,
+                  ),
+       
+                  SizedBox(height: height * 0.02),
+                  Text(
+                    AppLocalizations.of(context)!.introText1,
+                    textAlign: TextAlign.left,
+                    style: !themeProvider.isDark()?AppStyles.blackMed16:AppStyles.beigeMed16,
+                  ),
+                  SizedBox(height: height * 0.03),
+                  Row(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.language,
+                        style: AppStyles.blueMed20,
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(AppRoutes.introRoute);
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.letsStart,
-                      style: AppStyles.whiteMed20,
-                    ),
+                      Spacer(),
+                     CustomToggleSwitch()
+                    ],
                   ),
-                )
-              ])),
-    );
+                  SizedBox(height: height * 0.03),
+                  Row(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.theme,
+                        style: AppStyles.blueMed20,
+                      ),
+                      Spacer(),
+                      buildbutton(first: AppImages.sunImage, second: AppImages.moonImage, context: context)
+                    ],
+                  ),
+                  SizedBox(height: height*0.02,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.introRoute);
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.letsStart,
+                        style: AppStyles.whiteMed20,
+                      ),
+                    ),
+                  )
+                ])),);
   }
   ToggleSwitch buildbutton({
     required String first,

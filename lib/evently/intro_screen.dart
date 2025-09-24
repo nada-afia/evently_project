@@ -6,12 +6,16 @@ import 'package:evently_app/utilts/app_styles.dart';
 import 'package:evently_app/utilts/app_them.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../provider/app_them_provider.dart';
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<AppThemProvider>(context);
     var width = MediaQuery
         .of(context)
         .size
@@ -27,19 +31,19 @@ class IntroScreen extends StatelessWidget {
             text1: AppLocalizations.of(context)!.findEventsThatInspireYou,
             text2: AppLocalizations.of(context)!.introText2,
             width: width,
-            height: height)
+            height: height, context: context)
         ,
         buildPage(image: AppImages.managerDisk,
             text1:AppLocalizations.of(context)!.effortlessEventPlanning,
             text2: AppLocalizations.of(context)!.introText3,
             width: width,
-            height: height)
+            height: height, context: context)
         ,
         buildPage(image: AppImages.socialMedia,
             text1:AppLocalizations.of(context)!.connectWithFriends,
             text2:AppLocalizations.of(context)!.introText4,
             width: width,
-            height: height)
+            height: height, context: context)
 
       ],
       showBackButton: true,
@@ -84,12 +88,12 @@ class IntroScreen extends StatelessWidget {
       onDone: () {
         Navigator.of(context).pushNamed(AppRoutes.login);
       },
-      globalBackgroundColor: AppColors.primarybackground,
+      globalBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),
         activeSize: const Size(20.0, 10.0),
         activeColor: AppColors.blue,
-        color: AppColors.black,
+        color: !themeProvider.isDark()?AppColors.black:AppColors.beige,
         spacing: const EdgeInsets.symmetric(horizontal: 3.0),
         activeShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0)
@@ -101,7 +105,8 @@ class IntroScreen extends StatelessWidget {
   }
 
   PageViewModel buildPage(
-      {required String image, required String text1, required String text2, required var width, required var height }) {
+      {required String image, required String text1, required String text2, required var width, required var height,required BuildContext context }) {
+    var themeProvider = Provider.of<AppThemProvider>(context);
     return PageViewModel(
         titleWidget: Column(
           children: [
@@ -116,7 +121,7 @@ class IntroScreen extends StatelessWidget {
             SizedBox(height: height * 0.04,),
             Text(text1, style: AppStyles.blueMed20,),
             SizedBox(height: height * 0.04,),
-            Text(text2, style: AppStyles.blackMed16,)],)
+            Text(text2, style: !themeProvider.isDark()? AppStyles.blackMed16:AppStyles.beigeMed16,)],)
     );
   }
 }

@@ -12,6 +12,8 @@ class AppImages{
   static const String logo = 'assets/images/Logo.png';
   static const String email = 'assets/images/email-icon.png';
   static const String password = 'assets/images/lock.png';
-  static const String name = 'assets/images/name-icon.png';
+  static const String name = 'assets/images/icon.png';
   static const String hide = 'assets/images/hide-icon.png';
+  static const String google = 'assets/images/google-icon.png';
+  static const String changeSetting ='assets/images/change-setting.png';
 }

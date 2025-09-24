@@ -18,6 +18,11 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     color:AppColors.blue,
   );
+  static TextStyle blueMed16 = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color:AppColors.blue,
+  );
   static TextStyle whiteMed20 = GoogleFonts.inter(
     fontSize: 20,
     fontWeight: FontWeight.w500,
@@ -27,5 +32,18 @@ class AppStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: AppColors.grey,
+  );
+  static TextStyle blueBold16 = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    color:AppColors.blue,
+    decoration: TextDecoration.underline,
+      decorationColor: AppColors.blue
+  );
+  static TextStyle naturalWhiteMed20 = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: AppColors.naturalWhite,
   );
 }
