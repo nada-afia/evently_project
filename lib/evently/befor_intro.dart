@@ -1,4 +1,5 @@
 
+import 'package:evently_app/evently/custom_elevated_button.dart';
 import 'package:evently_app/evently/custom_language_toggle_switch.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/provider/app_them_provider.dart';
@@ -30,11 +31,10 @@ class BeforIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<AppThemProvider>(context);
-    var languageProvider=Provider.of<AppLanguageProvider>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-     body: Padding(
+     body: SafeArea(child: Padding(
             padding: EdgeInsets.symmetric(horizontal: height*0.02),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,14 +55,14 @@ class BeforIntro extends StatelessWidget {
                   Text(
                     AppLocalizations.of(context)!.personalizeYourExperience,
                     textAlign: TextAlign.left,
-                    style: AppStyles.blueMed20,
+                    style: AppStyles.blueBold20,
                   ),
-       
+
                   SizedBox(height: height * 0.02),
                   Text(
                     AppLocalizations.of(context)!.introText1,
                     textAlign: TextAlign.left,
-                    style: !themeProvider.isDark()?AppStyles.blackMed16:AppStyles.beigeMed16,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(height: height * 0.03),
                   Row(
@@ -75,7 +75,7 @@ class BeforIntro extends StatelessWidget {
                      CustomToggleSwitch()
                     ],
                   ),
-                  SizedBox(height: height * 0.03),
+                  SizedBox(height: height * 0.02),
                   Row(
                     children: [
                       Text(
@@ -86,27 +86,11 @@ class BeforIntro extends StatelessWidget {
                       buildbutton(first: AppImages.sunImage, second: AppImages.moonImage, context: context)
                     ],
                   ),
-                  SizedBox(height: height*0.02,),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.introRoute);
-                      },
-                      child: Text(
-                        AppLocalizations.of(context)!.letsStart,
-                        style: AppStyles.whiteMed20,
-                      ),
-                    ),
-                  )
-                ])),);
+                  SizedBox(height: height*0.01,),
+                  CustomElevatedButton(textButton: AppLocalizations.of(context)!.letsStart,
+                      onPressed: (){Navigator.of(context).pushNamed(AppRoutes.introRoute);})
+                ])),),
+        );
   }
   ToggleSwitch buildbutton({
     required String first,
