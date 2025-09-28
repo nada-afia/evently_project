@@ -10,6 +10,6 @@ class AppColors {
   static const Color primaryBackground=Color(0xFFF2FEFF);
   static const Color beige=Color(0xFFF4EBDC);
   static const Color grey=Color(0xFF7B7B7B);
-  static const Color red=Colors.red;
+  static const Color red=Color(0xFFFF5659);
 
 }

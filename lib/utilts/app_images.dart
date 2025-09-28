@@ -16,4 +16,16 @@ class AppImages{
   static const String hide = 'assets/images/hide-icon.png';
   static const String google = 'assets/images/google-icon.png';
   static const String changeSetting ='assets/images/change-setting.png';
+  static const String map ='assets/images/Map_Pin.png';
+  static const String birthday ='assets/images/birthday.png';
+  static const String holiday ='assets/images/holiday.png';
+  static const String home ='assets/images/home.png';
+  static const String profile ='assets/images/profile.png';
+  static const String favourite ='assets/images/favourite.png';
+  static const String selectedHome ='assets/images/selected-home.png';
+  static const String selectedProfile ='assets/images/selected-profile.png';
+  static const String selectedFavourite ='assets/images/selected-favourite.png';
+  static const String selectedMap ='assets/images/selected-map.png';
+  static const String profilePic ='assets/images/profile-pic.png';
+  static const String exit ='assets/images/Exit.png';
 }

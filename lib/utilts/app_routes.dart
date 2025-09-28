@@ -4,5 +4,9 @@ class AppRoutes{
   static String login='login';
   static String forgetScreen='forget';
   static String createScreen='create';
-
+  static String profileScreen='profile';
+  static String homeScreen='Home';
+  static String favouriteScreen='favourite';
+  static String mainScreen='main';
+  static String mapScreen='map';
 }

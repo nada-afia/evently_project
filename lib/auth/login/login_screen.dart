@@ -6,13 +6,10 @@ import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../provider/app_them_provider.dart';
 import '../../utilts/app_styles.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -23,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<AppThemProvider>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -45,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return'pls enter email';
                           }
                           final bool emailValid =
-                          RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(text);
                           if(!emailValid){
                             return 'pls enter valid email';
