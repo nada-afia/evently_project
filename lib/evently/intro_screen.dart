@@ -119,9 +119,9 @@ class IntroScreen extends StatelessWidget {
           children:
           [Image.asset(image, width: width * 0.90, height: height * 0.42,),
             SizedBox(height: height * 0.04,),
-            Text(text1, style: AppStyles.blueMed20,),
+            Text(text1, style: AppStyles.blueBold20,),
             SizedBox(height: height * 0.04,),
-            Text(text2, style: !themeProvider.isDark()? AppStyles.blackMed16:AppStyles.beigeMed16,)],)
+            Text(text2, style: Theme.of(context).textTheme.titleLarge)],)
     );
   }
 }

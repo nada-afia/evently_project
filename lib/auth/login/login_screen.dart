@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(AppLocalizations.of(context)!.dontHaveAccount,style: !themeProvider.isDark()?AppStyles.blackMed16:AppStyles.beigeMed16,),
+                      Text(AppLocalizations.of(context)!.dontHaveAccount,style:Theme.of(context).textTheme.titleLarge,),
                       TextButton(
                           onPressed: (){
                             Navigator.of(context).pushNamed(AppRoutes.createScreen);
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     if(_formKey.currentState?.validate()==true){
-
+     Navigator.of(context).pushNamed(AppRoutes.mainScreen);
     }
   }
 }
