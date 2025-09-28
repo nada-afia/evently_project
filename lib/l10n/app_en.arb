@@ -1,8 +1,10 @@
 {
-  "language": "language",
-  "theme": "theme",
-  "dark": "dark",
-  "light": "light",
+  "language": " Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light",
   "letsStart": "Let’s Start",
   "email": "Email",
   "password": "Password",
@@ -29,5 +31,24 @@
 
   "connectWithFriends": "Connect with Friends & Share Moments",
   "introText4": "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
-  "or": "Or"
+  "or": "Or",
+  "welcomeBack": "Welcome Back ✨",
+  "cairo": "Cairo , Egypt",
+  "all": "All",
+  "sport": "Sport",
+  "birthday": "Birthday",
+  "meeting": "Meeting",
+  "gaming": "Gaming",
+  "workshop": "Workshop",
+  "bookClub": "Book Club",
+  "exhibition": "Exhibition",
+  "holiday": "Holiday",
+  "eating": "Eating",
+  "searchforevent": "Search for Event",
+  "home": "Home",
+  "map": "Map",
+  "favourite": "Love",
+  "profile": "Profile",
+  "logout": "Log Out"
+
 }

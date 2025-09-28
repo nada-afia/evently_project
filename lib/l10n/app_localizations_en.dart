@@ -9,16 +9,22 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get language => 'language';
+  String get language => ' Language';
 
   @override
-  String get theme => 'theme';
+  String get english => 'English';
 
   @override
-  String get dark => 'dark';
+  String get arabic => 'Arabic';
 
   @override
-  String get light => 'light';
+  String get theme => 'Theme';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'Light';
 
   @override
   String get letsStart => 'Let’s Start';
@@ -92,4 +98,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get or => 'Or';
+
+  @override
+  String get welcomeBack => 'Welcome Back ✨';
+
+  @override
+  String get cairo => 'Cairo , Egypt';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get birthday => 'Birthday';
+
+  @override
+  String get meeting => 'Meeting';
+
+  @override
+  String get gaming => 'Gaming';
+
+  @override
+  String get workshop => 'Workshop';
+
+  @override
+  String get bookClub => 'Book Club';
+
+  @override
+  String get exhibition => 'Exhibition';
+
+  @override
+  String get holiday => 'Holiday';
+
+  @override
+  String get eating => 'Eating';
+
+  @override
+  String get searchforevent => 'Search for Event';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get map => 'Map';
+
+  @override
+  String get favourite => 'Love';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get logout => 'Log Out';
 }

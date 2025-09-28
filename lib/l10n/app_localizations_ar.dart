@@ -12,6 +12,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
   String get theme => 'الثيم';
 
   @override
@@ -92,4 +98,58 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get or => 'أو';
+
+  @override
+  String get welcomeBack => 'مرحبًا بعودتك ✨';
+
+  @override
+  String get cairo => 'القاهرة، مصر';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get sport => 'رياضة';
+
+  @override
+  String get birthday => 'عيد ميلاد';
+
+  @override
+  String get meeting => 'اجتماع';
+
+  @override
+  String get gaming => 'ألعاب';
+
+  @override
+  String get workshop => 'ورشة عمل';
+
+  @override
+  String get bookClub => 'نادي الكتاب';
+
+  @override
+  String get exhibition => 'معرض';
+
+  @override
+  String get holiday => 'عطلة';
+
+  @override
+  String get eating => 'أكل';
+
+  @override
+  String get searchforevent => 'ابحث عن فعالية';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get map => 'الخريطة';
+
+  @override
+  String get favourite => 'المفضلة';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get logout => 'Log Out';
 }
