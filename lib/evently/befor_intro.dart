@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../provider/app_language_provider.dart';
+import '../provider/app_them_provider.dart';
 import '../utilts/app_color.dart';
 import '../utilts/app_images.dart';
 import '../utilts/app_routes.dart';
@@ -24,13 +25,28 @@ class Content {
     this.text2,
   });
 }
-class BeforIntro extends StatelessWidget {
+class BeforIntro extends StatefulWidget {
   BeforIntro({super.key});
 
   @override
+  State<BeforIntro> createState() => _BeforIntroState();
+}
+
+class _BeforIntroState extends State<BeforIntro> {
+
+  late AppLanguageProvider languageProvider;
+  late AppThemProvider themeProvider;
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+    languageProvider.loadLanguage();
+    themeProvider.loadTheme();
+  });
+  }
+  @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<AppThemProvider>(context);
-    var languageProvider=Provider.of<AppLanguageProvider>(context);
+     themeProvider = Provider.of<AppThemProvider>(context);
+      languageProvider=Provider.of<AppLanguageProvider>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -57,7 +73,7 @@ class BeforIntro extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: AppStyles.blueMed20,
                   ),
-       
+
                   SizedBox(height: height * 0.02),
                   Text(
                     AppLocalizations.of(context)!.introText1,
@@ -108,6 +124,7 @@ class BeforIntro extends StatelessWidget {
                   )
                 ])),);
   }
+
   ToggleSwitch buildbutton({
     required String first,
     required String second,
@@ -139,5 +156,4 @@ class BeforIntro extends StatelessWidget {
     );
 
 }
-
 }
