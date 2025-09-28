@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey=GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child:Column(children: [
                       CustomTextField(hintText:AppLocalizations.of(context)!.email
                         ,prefixIcon:Image.asset(AppImages.email),
+                        controller:emailController ,
                         validator:(text) {
                           if(text==null || text.trim().isEmpty){
                             return'pls enter email';
@@ -129,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     if(_formKey.currentState?.validate()==true){
-     Navigator.of(context).pushNamed(AppRoutes.mainScreen);
+     Navigator.of(context).pushNamed(AppRoutes.mainScreen,arguments: emailController.text);
     }
   }
 }

@@ -7,8 +7,6 @@ import 'package:evently_app/utilts/app_them.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-
 import '../provider/app_them_provider.dart';
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -106,8 +104,7 @@ class IntroScreen extends StatelessWidget {
 
   PageViewModel buildPage(
       {required String image, required String text1, required String text2, required var width, required var height,required BuildContext context }) {
-    var themeProvider = Provider.of<AppThemProvider>(context);
-    return PageViewModel(
+     return PageViewModel(
         titleWidget: Column(
           children: [
             Image.asset(

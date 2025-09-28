@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../../../provider/app_them_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -57,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context)!.welcomeBack,style:!themeProvider.isDark()?AppStyles.whiteReg14:AppStyles.beigeReg14,),
-                Text("John Safwat",style: !themeProvider.isDark()?AppStyles.whiteBold24:AppStyles.beigeBold24,)
               ],
             ),
             Spacer(),

@@ -4,7 +4,6 @@ import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/provider/app_language_provider.dart';
 import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
-import 'package:evently_app/utilts/app_routes.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,6 @@ import '../../../provider/app_them_provider.dart';
 import '../../custom_elevated_button.dart';
 
 class ProfileScreen extends StatefulWidget {
-   const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -53,9 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                  Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     Text('John Safwat',style: AppStyles.whiteBold24,),
                      SizedBox(height: height*0.02,),
-                     Expanded(child:Text('johnsafwat.route@gmail.com',style: AppStyles.whiteMed16,) )
                    ],
                  )
                ],
@@ -153,10 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                onPressed: () {
                Navigator.of(context).popUntil((route) => route.isFirst,); },
                  bgColor: AppColors.red,
-              // borderColor: AppColors.transparent,
-                 iconWidget: Image.asset(AppImages.exit),hasIcon: true,//mainAxisAlignment: MainAxisAlignment.start,),
            ),
-           )],
 
        ),
      );

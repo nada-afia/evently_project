@@ -20,21 +20,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  final List<Widget> screens = [
-    HomeScreen(),
-    MapScreen(),
-    FavouriteScreen(),
-    ProfileScreen(),
-  ];
-    @override
-    Widget build(BuildContext context) {
-      var themeProvider=Provider.of<AppThemProvider>(context);
-      final iconList = <IconData>[
-        Icons.home_outlined,
-        Icons.map_sharp,
-        Icons.favorite,
-        Icons.person,
+      final List<Widget> screens = [
+        MapScreen(),
+        FavouriteScreen(),
       ];
+      var themeProvider=Provider.of<AppThemProvider>(context);
       return Scaffold(
         body:screens[currentIndex],
         floatingActionButton: FloatingActionButton(
