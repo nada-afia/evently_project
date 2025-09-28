@@ -153,10 +153,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                onPressed: () {
                Navigator.of(context).popUntil((route) => route.isFirst,); },
                  bgColor: AppColors.red,
-               borderColor: AppColors.transparent,
-                 iconWidget: Image.asset(AppImages.exit),hasIcon: true,mainAxisAlignment: MainAxisAlignment.start,),
+              // borderColor: AppColors.transparent,
+                 iconWidget: Image.asset(AppImages.exit),hasIcon: true,//mainAxisAlignment: MainAxisAlignment.start,),
            ),
-           ],
+           )],
 
        ),
      );
