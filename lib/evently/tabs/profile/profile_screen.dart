@@ -12,6 +12,9 @@ import '../../../provider/app_them_provider.dart';
 import '../../custom_elevated_button.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final String ?name;
+  const ProfileScreen({super.key,this.name});
+
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -34,7 +37,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
          backgroundColor: AppColors.blue,
        ),
        body: Column(
-         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
          children: [
            Container(
              padding: EdgeInsets.symmetric(horizontal: width*0.02,vertical: height*0.02)
@@ -51,7 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                  Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
+                     Text(widget.name!.split('@').first,style:Theme.of(context).textTheme.titleMedium,),
                      SizedBox(height: height*0.02,),
+                     Expanded(child: Text(widget.name!,style: Theme.of(context).textTheme.labelLarge,))
                    ],
                  )
                ],
@@ -148,11 +152,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
              child: CustomElevatedButton(textButton: AppLocalizations.of(context)!.logout,
                onPressed: () {
                Navigator.of(context).popUntil((route) => route.isFirst,); },
-                 bgColor: AppColors.red,
+                 bgColor: AppColors.red,borderColor: AppColors.transparent,
            ),
 
-       ),
-     );
+       ),]
+     ));
    }
 
   void showLanguageBottomSheet() {

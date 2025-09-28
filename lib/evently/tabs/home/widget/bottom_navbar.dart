@@ -1,4 +1,3 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:evently_app/evently/tabs/Map/map_screen.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/utilts/app_images.dart';
@@ -20,12 +19,18 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-      final List<Widget> screens = [
-        MapScreen(),
-        FavouriteScreen(),
-      ];
-      var themeProvider=Provider.of<AppThemProvider>(context);
-      return Scaffold(
+
+  @override
+  Widget build(BuildContext context) {
+    var themeProvider=Provider.of<AppThemProvider>(context);
+    var controller = ModalRoute.of(context)!.settings.arguments as String;
+    final List<Widget> screens = [
+      HomeScreen(name: controller,),
+      MapScreen(),
+      FavouriteScreen(),
+      ProfileScreen(name:controller),
+    ];
+    return Scaffold(
         body:screens[currentIndex],
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
@@ -41,14 +46,14 @@ class _MainScreenState extends State<MainScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            currentIndex=index;
-            setState(() {
+            currentIndex: currentIndex,
+            onTap: (index) {
+              currentIndex=index;
+              setState(() {
 
-            });
-          },
-          backgroundColor: Theme.of(context).primaryColor,
+              });
+            },
+            backgroundColor: Theme.of(context).primaryColor,
             type: BottomNavigationBarType.fixed,
             items: [
               buildBottomNavBarItem(unselectedIconName: AppImages.home, labelName: AppLocalizations.of(context)!.home, index: 0, selectedIconName:AppImages.selectedHome),
@@ -56,11 +61,11 @@ class _MainScreenState extends State<MainScreen> {
               buildBottomNavBarItem(unselectedIconName: AppImages.favourite, labelName: AppLocalizations.of(context)!.favourite, index: 2, selectedIconName: AppImages.selectedFavourite),
               buildBottomNavBarItem(unselectedIconName: AppImages.profile, labelName: AppLocalizations.of(context)!.profile, index: 3, selectedIconName: AppImages.selectedProfile)
             ])
-      );
+    );
   }
   BottomNavigationBarItem buildBottomNavBarItem({required String selectedIconName,
     required String labelName,required int index,required String unselectedIconName}){
-      return BottomNavigationBarItem(icon: Image.asset(currentIndex==index?selectedIconName:unselectedIconName),
-          label:labelName );
+    return BottomNavigationBarItem(icon: Image.asset(currentIndex==index?selectedIconName:unselectedIconName),
+        label:labelName );
   }
 }
