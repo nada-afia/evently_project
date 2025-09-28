@@ -151,5 +151,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profile => 'الملف الشخصي';
 
   @override
-  String get logout => 'Log Out';
+  String get logout => 'تسجيل الخروج';
 }
