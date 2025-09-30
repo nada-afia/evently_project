@@ -18,7 +18,23 @@ class AppImages{
   static const String changeSetting ='assets/images/change-setting.png';
   static const String map ='assets/images/Map_Pin.png';
   static const String birthday ='assets/images/birthday.png';
+  static const String bookClub ='assets/images/bookclub.png';
+  static const String gaming ='assets/images/gaming.png';
+  static const String meeting ='assets/images/metting.png';
+  static const String workShop ='assets/images/workshop.png';
+  static const String sport ='assets/images/sport.png';
+  static const String exhibition ='assets/images/exhibition.png';
+  static const String eating ='assets/images/eating.png';
   static const String holiday ='assets/images/holiday.png';
+  static const String birthdayDark ='assets/images/birthday_dark.png';
+  static const String bookClubDark='assets/images/bookclub_dark.png';
+  static const String gamingDark ='assets/images/gaming_dark.png';
+  static const String meetingDark ='assets/images/meeting_dark.png';
+  static const String workShopDark ='assets/images/workshop_dark.png';
+  static const String sportDark ='assets/images/Sport_dark.png';
+  static const String exhibitionDark ='assets/images/exhibition_dark.png';
+  static const String eatingDark ='assets/images/eating_dark.png';
+  static const String holidayDark ='assets/images/holiday_dark.png';
   static const String home ='assets/images/home.png';
   static const String profile ='assets/images/profile.png';
   static const String favourite ='assets/images/favourite.png';
@@ -28,4 +44,10 @@ class AppImages{
   static const String selectedMap ='assets/images/selected-map.png';
   static const String profilePic ='assets/images/profile-pic.png';
   static const String exit ='assets/images/Exit.png';
+  static const String noteEDiting ='assets/images/Note_Edit.png';
+  static const String time ='assets/images/time.png';
+  static const String calender ='assets/images/calender.png';
+  static const String locationIcon ='assets/images/location_icon.png';
+
+
 }

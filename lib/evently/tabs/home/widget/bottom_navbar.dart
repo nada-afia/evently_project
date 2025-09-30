@@ -1,6 +1,7 @@
 import 'package:evently_app/evently/tabs/Map/map_screen.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/utilts/app_images.dart';
+import 'package:evently_app/utilts/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,9 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         body:screens[currentIndex],
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(AppRoutes.createEventScreen);
+          },
           shape:StadiumBorder(
               side: BorderSide(
                   color: themeProvider.isDark()?AppColors.beige:AppColors.white,

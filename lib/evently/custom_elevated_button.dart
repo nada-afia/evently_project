@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../utilts/app_color.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  final String textButton;
+  final String ?textButton;
    final Color?  bgColor;
    final TextStyle? textStyle;
     final VoidCallback onPressed;
@@ -13,7 +13,7 @@ class CustomElevatedButton extends StatelessWidget {
    final Color borderColor;
     final MainAxisAlignment  mainAxisAlignment;
     const CustomElevatedButton({super.key
-      ,required this.textButton,
+      , this.textButton,
       this.bgColor,this.textStyle,
       required this.onPressed,
     this.hasIcon=false,
@@ -42,16 +42,7 @@ class CustomElevatedButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal:width*0.04, vertical:height*0.02),
         ),
         onPressed: onPressed,
-        child: !hasIcon?
-        Text(textButton,style:textStyle?? AppStyles.naturalWhiteMed20,):
-        Row(
-          mainAxisAlignment: mainAxisAlignment,
-          children: [
-             iconWidget!,
-            SizedBox(width: width*0.01,),
-            Text(textButton,style:textStyle?? AppStyles.naturalWhiteMed20,)
-          ],
-        ),
+        child:hasIcon? iconWidget!:Text(textButton??'',style: AppStyles.whiteMed20,)
       ),
     );
   }

@@ -49,6 +49,20 @@
   "map": "الخريطة",
   "favourite": "المفضلة",
   "profile": "الملف الشخصي",
-  "logout": "تسجيل الخروج"
+  "logout": "تسجيل الخروج",
+  "createevent": "إضافة حدث",
+  "title": "العنوان",
+  "eventTitle": "عنوان الفعالية",
+  "description": "الوصف",
+  "eventDate": "تاريخ الفعالية",
+  "eventDescription": "تفاصيل الفعالية",
+  "eventTime": "وقت الفعالية",
+  "location": "الموقع",
+  "addEvent": "إضافة فعالية",
+  "chooseDate": "اختر التاريخ",
+  "chooseTime": "اختر الوقت",
+  "eventDetails": "تفاصيل الفعاليه",
+  "editEvent": "عدل الفعاليه",
+  "chooseEventLocation": "اختار مكان الفعاليه"
 
 }

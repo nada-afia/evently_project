@@ -12,12 +12,20 @@ class AppThem{
     primaryColor: AppColors.blue,
     focusColor: AppColors.white,
     dividerColor: AppColors.white,
+    shadowColor: AppColors.white,
+    canvasColor: AppColors.black,
+      cardColor: AppColors.white,
     iconTheme: const IconThemeData(color: Colors.blue, size: 20),
     textTheme:  TextTheme(
       headlineLarge: AppStyles.blueMed16,
       headlineMedium: AppStyles.blueBold16,
       headlineSmall: AppStyles.blackBold20,
-      titleLarge: AppStyles.blackMed16
+      titleLarge: AppStyles.blackMed16,
+      titleMedium: AppStyles.beigeBold24,
+      titleSmall: AppStyles.whiteReg14,
+      labelLarge: AppStyles.whiteMed16,
+      labelMedium: AppStyles.whiteBold16,
+      labelSmall: AppStyles.greyMed16
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.blue,
@@ -35,12 +43,21 @@ class AppThem{
     primaryColor: AppColors.dark,
     focusColor: AppColors.blue,
 dividerColor: AppColors.dark,
+      shadowColor: AppColors.beige,
+      canvasColor: AppColors.beige,
+    cardColor: AppColors.black,
     scaffoldBackgroundColor: AppColors.dark,
     textTheme:   TextTheme(
      headlineLarge: AppStyles. beigeMed16,
       headlineMedium: AppStyles.beigeBold20,
         headlineSmall: AppStyles.beigeBold20,
-        titleLarge: AppStyles.beigeMed16
+        titleLarge: AppStyles.beigeMed16,
+        titleMedium: AppStyles.beigeBold24,
+        titleSmall: AppStyles.beigeReg14,
+        labelLarge: AppStyles.beigeMed16,
+      labelMedium: AppStyles.blackBold16,
+      labelSmall: AppStyles.beigeMed16
+
     ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.dark,

@@ -49,6 +49,21 @@
   "map": "Map",
   "favourite": "Love",
   "profile": "Profile",
-  "logout": "Log Out"
+  "logout": "Log Out",
+  "createevent": "Create Event",
+  "title": "Title",
+  "eventTitle": "Event Title",
+  "description": "Description",
+  "eventDate": "Event Date",
+  "eventDescription": "Event Description",
+  "eventTime": "Event Time",
+  "location": "Location",
+  "addEvent": "Add Event",
+  "chooseDate": "Choose Date",
+  "chooseTime": "Choose Time",
+  "eventDetails": "Event Details",
+  "editEvent": "Edit Event",
+  "chooseEventLocation": "Choose Event Location"
+
 
 }

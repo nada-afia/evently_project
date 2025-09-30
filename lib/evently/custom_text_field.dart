@@ -12,19 +12,25 @@ class CustomTextField extends StatelessWidget {
   TextInputType?keyboardType;
   TextEditingController? controller;
    bool obscureText;
+   int ?maxLines;
   CustomTextField({super.key,
     this.borderColor=AppColors.grey,
-    this.hintStyle,this.hintText,
+    this.hintStyle,
+    this.hintText,
     this.prefixIcon
     ,this.suffixIcon,
     this.validator,
     this.keyboardType=TextInputType.text,
     this.obscureText=false,
-     this.controller
+     this.controller,
+    this.maxLines=1
   });
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return TextFormField(
+     maxLines: maxLines,
       obscureText:obscureText,
      controller: controller,
      keyboardType: keyboardType,
@@ -34,6 +40,7 @@ class CustomTextField extends StatelessWidget {
         focusedBorder: buildOut(borderColor: borderColor),
         errorBorder: buildOut(borderColor: AppColors.red),
         focusedErrorBorder:buildOut(borderColor: AppColors.red) ,
+
         hintText: hintText,
         hintStyle: hintStyle?? AppStyles.greyMed16 ,
         prefixIcon:prefixIcon,

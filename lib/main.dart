@@ -5,6 +5,7 @@ import 'package:evently_app/evently/intro_screen.dart';
 import 'package:evently_app/auth/login/login_screen.dart';
 import 'package:evently_app/evently/tabs/favourite/favourite_screen.dart';
 import 'package:evently_app/evently/tabs/home/widget/bottom_navbar.dart';
+import 'package:evently_app/evently/tabs/home/widget/create_event.dart';
 import 'package:evently_app/evently/tabs/profile/profile_screen.dart';
 import 'package:evently_app/provider/app_language_provider.dart';
 import 'package:evently_app/provider/app_them_provider.dart';
@@ -52,6 +53,7 @@ import 'l10n/app_localizations.dart';
          AppRoutes.favouriteScreen:(context) =>FavouriteScreen(),
          AppRoutes.mapScreen:(context) =>MapScreen(),
          AppRoutes.mainScreen:(context) =>MainScreen(),
+         AppRoutes.createEventScreen:(context)=>CreateEvent(),
 
        },
        locale:Locale(languageProvider.appLanguage),

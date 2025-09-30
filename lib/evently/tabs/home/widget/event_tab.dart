@@ -7,9 +7,17 @@ import 'package:provider/provider.dart';
 import '../../../../provider/app_them_provider.dart';
 
 class EventTab extends StatelessWidget {
-   EventTab({super.key, required this.eventName, required this.isSelected});
+   EventTab({super.key,
+     required this.eventName, required this.isSelected,
+     required this.selectedColor, required this.borderColor,
+     required this.selectedText, required this.unSelectedText});
    final String eventName;
    final bool isSelected;
+   final Color borderColor;
+  final Color  selectedColor;
+  final TextStyle? selectedText;
+  final TextStyle ?unSelectedText;
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -26,13 +34,13 @@ class EventTab extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(46),
-        color:isSelected?Theme.of(context).focusColor:AppColors.transparent ,
+        color:isSelected?selectedColor:AppColors.transparent ,
         border: Border.all(
-          color: Theme.of(context).focusColor,
-          width: 2,
+          color: borderColor,
+          width: 1,
         ),
       ),
-      child: Text(eventName,style:isSelected?themeProvider.isDark()?AppStyles.beigeMed16:AppStyles.blueMed16:AppStyles.whiteMed16 ,),
+      child: Text(eventName,style:isSelected? selectedText:unSelectedText,),
     );
   }
 }
