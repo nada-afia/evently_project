@@ -1,0 +1,152 @@
+import 'package:evently_app/evently/tabs/home/widget/date_or_time.dart';
+import 'package:evently_app/evently/tabs/home/widget/event_tab.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/utilts/app_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/app_them_provider.dart';
+import '../../../utilts/app_color.dart';
+import '../../../utilts/app_images.dart';
+import '../../custom_Icon_container.dart';
+import '../../custom_elevated_button.dart';
+import '../../custom_text_field.dart';
+class EditEvent extends StatefulWidget {
+  EditEvent({super.key});
+
+  @override
+  State<EditEvent> createState() => _EditEventState();
+}
+
+class _EditEventState extends State<EditEvent> {
+  int selected=0;
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var themeProvider=Provider.of<AppThemProvider>(context);
+    final List<String> eventsName = [
+      AppLocalizations.of(context)!.sport,
+      AppLocalizations.of(context)!.birthday,
+      AppLocalizations.of(context)!.meeting,
+      AppLocalizations.of(context)!.gaming,
+      AppLocalizations.of(context)!.workshop,
+      AppLocalizations.of(context)!.bookClub,
+      AppLocalizations.of(context)!.exhibition,
+      AppLocalizations.of(context)!.holiday,
+      AppLocalizations.of(context)!.eating,
+
+    ];
+    final List<String> imageEvents = [
+      AppImages.sport,
+      AppImages.birthday,
+      AppImages.meeting,
+      AppImages.gaming,
+      AppImages.workShop,
+      AppImages.bookClub,
+      AppImages.exhibition,
+      AppImages.holiday,
+      AppImages.eating
+    ];
+    final List<String> imageEventsDark = [
+      AppImages.sportDark,
+      AppImages.birthdayDark,
+      AppImages.meetingDark,
+      AppImages.gamingDark,
+      AppImages.workShopDark,
+      AppImages.bookClubDark,
+      AppImages.exhibitionDark,
+      AppImages.holidayDark,
+      AppImages.eatingDark
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: width*0.24 ,
+        title: Text(AppLocalizations.of(context)!.editEvent,style: AppStyles.blueMed16,),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding:   EdgeInsets.symmetric(horizontal:width*0.04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Container(
+              width: width*0.9,
+              height: height*0.24,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(image: AssetImage(!themeProvider.isDark()?imageEvents[selected]:imageEventsDark[selected],),fit: BoxFit.cover)
+              ),
+            ),
+              DefaultTabController(length: eventsName.length,
+                  child:TabBar(
+                      isScrollable: true,
+                      labelPadding: EdgeInsets.zero,
+                      tabAlignment: TabAlignment.start,
+                      indicatorColor:AppColors.transparent ,
+                      dividerColor: AppColors.transparent,
+                      onTap: (index) {
+                        selected=index;
+                        setState(() {
+          
+                        });
+                        // Navigator.of(context).pushNamed(AppRoutes.createEventScreen,arguments: selected);
+                      },
+                      tabs:eventsName.map((eventName) =>
+                          EventTab(eventName: eventName, isSelected:selected==eventsName.indexOf(eventName),
+                            selectedColor: AppColors.blue, borderColor: AppColors.blue, selectedText:Theme.of(context).textTheme.labelMedium,unSelectedText: AppStyles.blueMed16,),).toList()
+          
+                  )
+              ),
+              Text(AppLocalizations.of(context)!.title,style:Theme.of(context).textTheme.titleLarge),
+              CustomTextField(hintText: AppLocalizations.of(context)!.eventTitle,hintStyle: Theme.of(context).textTheme.labelSmall,
+                prefixIcon:Image.asset(AppImages.noteEDiting,), validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter a title";
+                  }
+                  return null;
+                },),
+              SizedBox(height: height*0.02,),
+              Text(AppLocalizations.of(context)!.description,style:Theme.of(context).textTheme.titleLarge),
+              CustomTextField(hintText: AppLocalizations.of(context)!.eventDescription,
+                hintStyle:Theme.of(context).textTheme.labelSmall,maxLines: 4, validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter a description";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: height*0.02,),
+              DateOrTime(image: AppImages.calender,
+                firstText: AppLocalizations.of(context)!.eventDate,
+                secondText: AppLocalizations.of(context)!.chooseDate, isDate: true,),
+              SizedBox(height: height*0.02,),
+              DateOrTime(image: AppImages.time,
+                firstText: AppLocalizations.of(context)!.eventTime,
+                secondText: AppLocalizations.of(context)!.chooseTime, isDate: false,),
+              SizedBox(height: height*0.02,),
+              Text(AppLocalizations.of(context)!.location,style:Theme.of(context).textTheme.titleLarge,),
+              SizedBox(height: height*0.02,),
+              CustomElevatedButton(textButton:AppLocalizations.of(context)!.chooseEventLocation,hasIcon: true,
+                  bgColor: AppColors.transparent,
+          
+                  iconWidget: Row(
+                    children: [
+                      CustomIconContainer(image: AppImages.locationIcon)
+                      , SizedBox(width: width*0.02,),
+                      Text(AppLocalizations.of(context)!.chooseEventLocation,style:AppStyles.blueMed16),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined,color: AppColors.blue,)
+                    ],
+                  ),
+                  onPressed: (){}),
+              SizedBox(height: height*0.02,),
+              CustomElevatedButton(onPressed: (){},textButton: AppLocalizations.of(context)!.updateEvent,)
+            ],
+          
+          ),
+        ),
+      ),
+    );
+  }
+}
