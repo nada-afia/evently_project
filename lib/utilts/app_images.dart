@@ -48,6 +48,9 @@ class AppImages{
   static const String time ='assets/images/time.png';
   static const String calender ='assets/images/calender.png';
   static const String locationIcon ='assets/images/location_icon.png';
+  static const String delete ='assets/images/delete.png';
+  static const String edit ='assets/images/Edit.png';
+  static const String mapDetails ='assets/images/map_details.png';
 
 
 }

@@ -9,12 +9,12 @@ import '../../../../provider/app_them_provider.dart';
 class EventTab extends StatelessWidget {
    EventTab({super.key,
      required this.eventName, required this.isSelected,
-     required this.selectedColor, required this.borderColor,
-     required this.selectedText, required this.unSelectedText});
+       this.selectedColor,   this.borderColor,
+      this.selectedText,  this.unSelectedText});
    final String eventName;
    final bool isSelected;
-   final Color borderColor;
-  final Color  selectedColor;
+   final Color ?borderColor;
+  final Color ? selectedColor;
   final TextStyle? selectedText;
   final TextStyle ?unSelectedText;
 
@@ -36,7 +36,10 @@ class EventTab extends StatelessWidget {
         borderRadius: BorderRadius.circular(46),
         color:isSelected?selectedColor:AppColors.transparent ,
         border: Border.all(
-          color: borderColor,
+          color: borderColor ??
+              (themeProvider.isDark()
+                  ? AppColors.beige
+                  : AppColors.white),
           width: 1,
         ),
       ),

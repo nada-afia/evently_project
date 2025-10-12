@@ -194,4 +194,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chooseEventLocation => 'اختار مكان الفعاليه';
+
+  @override
+  String get weAreGoing => 'سنذهب للعب كرة القدم';
+
+  @override
+  String get updateEvent => 'تحديث الفعاليه';
+
+  @override
+  String get noEvent => 'لا يوجد فعاليه';
 }

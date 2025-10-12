@@ -107,9 +107,14 @@ class AppStyles {
       decorationColor: AppColors.blue
   );
   static TextStyle blueBold14 = GoogleFonts.inter(
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: FontWeight.bold,
       color:AppColors.blue,
+  );
+  static TextStyle blueMed24 = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    color:AppColors.blue,
   );
   static TextStyle naturalWhiteMed20 = GoogleFonts.inter(
     fontSize: 20,

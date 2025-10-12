@@ -463,6 +463,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose Event Location'**
   String get chooseEventLocation;
+
+  /// No description provided for @weAreGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'We Are Going To Play Football'**
+  String get weAreGoing;
+
+  /// No description provided for @updateEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get updateEvent;
+
+  /// No description provided for @noEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'No Event Found'**
+  String get noEvent;
 }
 
 class _AppLocalizationsDelegate

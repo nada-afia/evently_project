@@ -63,7 +63,10 @@
   "chooseTime": "Choose Time",
   "eventDetails": "Event Details",
   "editEvent": "Edit Event",
-  "chooseEventLocation": "Choose Event Location"
+  "chooseEventLocation": "Choose Event Location",
+  "weAreGoing": "We Are Going To Play Football",
+  "updateEvent": "Update Event",
+  "noEvent": "No Event Found"
 
 
 }

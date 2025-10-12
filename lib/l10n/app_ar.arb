@@ -63,6 +63,9 @@
   "chooseTime": "اختر الوقت",
   "eventDetails": "تفاصيل الفعاليه",
   "editEvent": "عدل الفعاليه",
-  "chooseEventLocation": "اختار مكان الفعاليه"
+  "chooseEventLocation": "اختار مكان الفعاليه",
+  "weAreGoing": "سنذهب للعب كرة القدم",
+  "updateEvent": "تحديث الفعاليه",
+  "noEvent": "لا يوجد فعاليه"
 
 }

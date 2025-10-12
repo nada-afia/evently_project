@@ -194,4 +194,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chooseEventLocation => 'Choose Event Location';
+
+  @override
+  String get weAreGoing => 'We Are Going To Play Football';
+
+  @override
+  String get updateEvent => 'Update Event';
+
+  @override
+  String get noEvent => 'No Event Found';
 }

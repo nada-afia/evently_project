@@ -6,11 +6,12 @@ import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../provider/app_them_provider.dart';
+import '../../../provider/event_list_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? name;
+
   const HomeScreen({super.key,this.name});
 
 
@@ -19,40 +20,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selected=0;
-  bool isLiked=false;
 
+  bool isLiked=false;
   @override
   Widget build(BuildContext context) {
+
+    var eventListProvider=Provider.of<EventListProvider>(context);
     var themeProvider = Provider.of<AppThemProvider>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    final List<String> eventsName = [
-      AppLocalizations.of(context)!.all,
-      AppLocalizations.of(context)!.sport,
-      AppLocalizations.of(context)!.birthday,
-      AppLocalizations.of(context)!.meeting,
-      AppLocalizations.of(context)!.gaming,
-      AppLocalizations.of(context)!.workshop,
-      AppLocalizations.of(context)!.bookClub,
-      AppLocalizations.of(context)!.exhibition,
-      AppLocalizations.of(context)!.holiday,
-      AppLocalizations.of(context)!.eating,
-      'All'
-          'Sport',
-      'Birthday',
-      'Meeting',
-      'Gaming',
-      'WorkShop',
-      'Book Club',
-      'Exhibition',
-      'Holiday',
-      'Eating',
-    ];
+    if(eventListProvider.eventList.isEmpty){
+      eventListProvider.getAllEvents();}
+    eventListProvider.getEventNameList(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: AppColors.transparent,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+
+          ),
+        ),
         title: Row(
           children: [
             Column(
@@ -96,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(AppLocalizations.of(context)!.cairo,style: AppStyles.whiteMed14,)
                   ],
                 ),
-                DefaultTabController(length: eventsName.length,
+                DefaultTabController(length: eventListProvider.eventsName.length,
                     child:TabBar(
                         isScrollable: true,
                         labelPadding: EdgeInsets.zero,
@@ -104,26 +93,28 @@ class _HomeScreenState extends State<HomeScreen> {
                         indicatorColor:AppColors.transparent ,
                         dividerColor: AppColors.transparent,
                         onTap: (index) {
-                          selected=index;
-                          setState(() {
-                            isLiked=!isLiked;
-                          });
+                          eventListProvider.changeSelectedIndex(index);
                         },
-                        tabs:eventsName.map((eventName) =>
-                            EventTab(eventName: eventName, isSelected:selected==eventsName.indexOf(eventName)),).toList()
+                        tabs:eventListProvider.eventsName.map((eventName) =>
+                            EventTab(eventName: eventName,
+                              isSelected:eventListProvider.selectedIndex==eventListProvider.eventsName.indexOf(eventName),
+                              selectedColor: Theme.of(context).focusColor,
+                              borderColor: Theme.of(context).focusColor,),).toList()
 
                     )
                 ),
               ],
             ),
           ),
-          Expanded(child: ListView.builder(
+          Expanded
+            (child:eventListProvider.filterEventList.isEmpty?Center(child: Text(AppLocalizations.of(context)!.noEvent,style: Theme.of(context).textTheme.headlineSmall,),): ListView.builder(
               itemBuilder: (context, index) {
-                return EventItem(isLiked: isLiked, image: AppImages.birthday,);
+                return EventItem( event: eventListProvider.filterEventList[index],);
               },
-              itemCount: 20))
+              itemCount: eventListProvider.filterEventList.length))
         ],
       ),
     );
   }
+
 }

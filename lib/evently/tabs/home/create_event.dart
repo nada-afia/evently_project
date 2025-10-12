@@ -1,22 +1,21 @@
 import 'package:evently_app/evently/custom_Icon_container.dart';
 import 'package:evently_app/evently/custom_elevated_button.dart';
 import 'package:evently_app/evently/custom_text_field.dart';
-import 'package:evently_app/evently/tabs/home/widget/create_event_data.dart';
 import 'package:evently_app/evently/tabs/home/widget/date_or_time.dart';
+import 'package:evently_app/firebase_utils.dart';
+import 'package:evently_app/model/event.dart';
 import 'package:evently_app/provider/app_them_provider.dart';
 import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
-import 'package:evently_app/utilts/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../l10n/app_localizations.dart';
 import '../../../provider/event_list_provider.dart';
 import '../../../utilts/app_styles.dart';
 import 'widget/event_tab.dart';
 
 class CreateEvent extends StatefulWidget {
-  CreateEvent({super.key});
+  const CreateEvent({super.key});
 
   @override
   State<CreateEvent> createState() => _CreateEventState();
@@ -24,6 +23,12 @@ class CreateEvent extends StatefulWidget {
 
 class _CreateEventState extends State<CreateEvent> {
   int selected=0;
+  String selectedEventName='';
+  String selectedEventImage='';
+  DateTime?selectedDate;
+  String formateDate='';
+  TimeOfDay? selectedTime;
+  String formateTime='';
   final _formKey=GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -49,8 +54,10 @@ class _CreateEventState extends State<CreateEvent> {
     AppImages.holidayDark,
     AppImages.eatingDark
   ];
+  late EventListProvider eventListProvider;
   @override
   Widget build(BuildContext context) {
+     eventListProvider=Provider.of<EventListProvider>(context);
     var themeProvider=Provider.of<AppThemProvider>(context);
      var width=MediaQuery.of(context).size.width;
      var height=MediaQuery.of(context).size.height;
@@ -89,6 +96,7 @@ class _CreateEventState extends State<CreateEvent> {
                   ),
                 ),
                 DefaultTabController(length: eventsName.length,
+                    initialIndex: 0,
                     child:TabBar(
                         isScrollable: true,
                         labelPadding: EdgeInsets.zero,
@@ -97,13 +105,21 @@ class _CreateEventState extends State<CreateEvent> {
                         dividerColor: AppColors.transparent,
                         onTap: (index) {
                           selected=index;
+                          selectedEventName = eventsName[index];
+                          selectedEventImage = !themeProvider.isDark()
+                              ? imageEvents[index]
+                              : imageEventsDark[index];
                           setState(() {
 
                           });
                         },
                         tabs:eventsName.map((eventName) =>
-                            EventTab(eventName: eventName, isSelected:selected==eventsName.indexOf(eventName),
-                              selectedColor: AppColors.blue, borderColor: AppColors.blue, selectedText:Theme.of(context).textTheme.labelMedium,unSelectedText: AppStyles.blueMed16,),).toList()
+                            EventTab(eventName: eventName,
+                              isSelected:selected==eventsName.indexOf(eventName),
+                              selectedColor: AppColors.blue,
+                              borderColor: AppColors.blue,
+                              selectedText:Theme.of(context).textTheme.labelMedium,
+                              unSelectedText: AppStyles.blueMed16,),).toList()
 
                     )
                 ),
@@ -126,13 +142,15 @@ class _CreateEventState extends State<CreateEvent> {
                   }, controller: descriptionController,
                 ),
                 SizedBox(height: height*0.02,),
-                DateOrTime(image: AppImages.calender,
-                    firstText: AppLocalizations.of(context)!.eventDate,
-                    secondText: AppLocalizations.of(context)!.chooseDate, isDate: true,),
+                DateOrTime(iconName:AppImages.calender,
+                    eventDateOrTime:  AppLocalizations.of(context)!.eventDate,
+                    onChooseEventOrDate: chooseDate,
+                    onChooseDateOrTime:  selectedDate==null?AppLocalizations.of(context)!.chooseDate:'${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'),
                 SizedBox(height: height*0.02,),
-            DateOrTime(image: AppImages.time,
-                firstText: AppLocalizations.of(context)!.eventTime,
-                secondText: AppLocalizations.of(context)!.chooseTime, isDate: false,),
+                DateOrTime(iconName: AppImages.time,
+                    eventDateOrTime: AppLocalizations.of(context)!.eventTime,
+                    onChooseEventOrDate: chooseTime,
+                    onChooseDateOrTime: selectedTime==null?AppLocalizations.of(context)!.chooseTime:formateTime),
                 SizedBox(height: height*0.02,),
                 Text(AppLocalizations.of(context)!.location,style:Theme.of(context).textTheme.titleLarge,),
                 SizedBox(height: height*0.02,),
@@ -150,7 +168,7 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                     onPressed: (){}),
                 SizedBox(height: height*0.02,),
-                CustomElevatedButton(onPressed: (){add();},textButton: AppLocalizations.of(context)!.addEvent,)
+                CustomElevatedButton(onPressed: (){addEvent();},textButton: AppLocalizations.of(context)!.addEvent,)
               ],
             ),
           ),
@@ -158,17 +176,47 @@ class _CreateEventState extends State<CreateEvent> {
       ),
     );
   }
-  void add() {
-    if (_formKey.currentState?.validate() == true) {
-      final newEvent = CreateEventModel(
-        title: titleController.text.trim(),
-        description: descriptionController.text.trim(),
-        image: imageEvents[selected],
-      );
+  chooseDate() async {
+    var chooseDate=  await showDatePicker(context: context,initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365))
+    );
+    selectedDate=chooseDate;
+    setState(() {
 
+    });
+  }
 
-      Provider.of<EventListProvider>(context,listen: false).addEvent(newEvent);
-      Navigator.of(context).pop();
+  chooseTime() async {
+    var chooseTime=  await  showTimePicker(context: context,
+        initialTime: TimeOfDay.now()
+    );
+    selectedTime=chooseTime;
+    if(selectedTime!=null){
+      formateTime=selectedTime!.format(context);
+      setState(() {
+
+      });
     }
   }
+  void addEvent() async {
+    if (_formKey.currentState?.validate() == true) {
+      Event newEvent = Event(
+        title: titleController.text,
+        description: descriptionController.text,
+        eventImage: selectedEventImage,
+        eventName: selectedEventName,
+        eventTime: formateTime,
+        eventDateTime: selectedDate!,
+      );
+       FirebaseUtils.addEventToFIreStore(newEvent).timeout(Duration(seconds: 1)
+       ,onTimeout: (){
+              print('data');
+              eventListProvider.getAllEvents();
+              Navigator.pop(context);
+           }
+       );
+    }
+  }
+
 }

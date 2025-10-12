@@ -114,12 +114,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: height*0.02,),
-                  CustomElevatedButton(textButton: AppLocalizations.of(context)!.loginWithGoogle,
+                  CustomElevatedButton(
                     bgColor: AppColors.transparent,
-                    textStyle: AppStyles.blueMed20,
                     onPressed: () {  },
                     hasIcon: true,
-                    iconWidget: Image.asset(AppImages.google),),
+                    iconWidget:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(AppImages.google),
+                        SizedBox(width: width*0.02,),
+                        Text(AppLocalizations.of(context)!.loginWithGoogle,style:AppStyles.blueMed20 ,),
+                      ],
+                    ),),
                   SizedBox(height: height*0.02,),
                   CustomToggleSwitch()
                 ],

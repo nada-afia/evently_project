@@ -10,4 +10,6 @@ class AppRoutes{
   static String mainScreen='main';
   static String mapScreen='map';
   static String createEventScreen='createEvent';
+  static String eventDetailsScreen='eventDetails';
+  static String editScreen='edit';
 }

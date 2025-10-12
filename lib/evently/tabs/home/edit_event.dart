@@ -4,7 +4,6 @@ import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../provider/app_them_provider.dart';
 import '../../../utilts/app_color.dart';
 import '../../../utilts/app_images.dart';
@@ -12,7 +11,7 @@ import '../../custom_Icon_container.dart';
 import '../../custom_elevated_button.dart';
 import '../../custom_text_field.dart';
 class EditEvent extends StatefulWidget {
-  EditEvent({super.key});
+  const EditEvent({super.key});
 
   @override
   State<EditEvent> createState() => _EditEventState();
@@ -20,7 +19,10 @@ class EditEvent extends StatefulWidget {
 
 class _EditEventState extends State<EditEvent> {
   int selected=0;
-
+  DateTime?selectedDate;
+  String formateDate='';
+  TimeOfDay? selectedTime;
+  String formateTime='';
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -117,13 +119,15 @@ class _EditEventState extends State<EditEvent> {
                 },
               ),
               SizedBox(height: height*0.02,),
-              DateOrTime(image: AppImages.calender,
-                firstText: AppLocalizations.of(context)!.eventDate,
-                secondText: AppLocalizations.of(context)!.chooseDate, isDate: true,),
+              DateOrTime(iconName:AppImages.calender,
+                  eventDateOrTime:  AppLocalizations.of(context)!.eventDate,
+                  onChooseEventOrDate: chooseDate,
+                  onChooseDateOrTime:  selectedDate==null?AppLocalizations.of(context)!.chooseDate:'${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'),
               SizedBox(height: height*0.02,),
-              DateOrTime(image: AppImages.time,
-                firstText: AppLocalizations.of(context)!.eventTime,
-                secondText: AppLocalizations.of(context)!.chooseTime, isDate: false,),
+              DateOrTime(iconName: AppImages.time,
+                  eventDateOrTime: AppLocalizations.of(context)!.eventTime,
+                  onChooseEventOrDate: chooseTime,
+                  onChooseDateOrTime: selectedTime==null?AppLocalizations.of(context)!.chooseTime:formateTime),
               SizedBox(height: height*0.02,),
               Text(AppLocalizations.of(context)!.location,style:Theme.of(context).textTheme.titleLarge,),
               SizedBox(height: height*0.02,),
@@ -148,5 +152,28 @@ class _EditEventState extends State<EditEvent> {
         ),
       ),
     );
+  }
+  chooseDate() async {
+    var chooseDate=  await showDatePicker(context: context,initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365))
+    );
+    selectedDate=chooseDate;
+    setState(() {
+
+    });
+  }
+
+  chooseTime() async {
+    var chooseTime=  await  showTimePicker(context: context,
+        initialTime: TimeOfDay.now()
+    );
+    selectedTime=chooseTime;
+    if(selectedTime!=null){
+      formateTime=selectedTime!.format(context);
+      setState(() {
+
+      });
+    }
   }
 }
