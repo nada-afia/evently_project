@@ -2,11 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_app/evently/custom_Icon_container.dart';
 import 'package:evently_app/evently/custom_elevated_button.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/provider/event_list_provider.dart';
 import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_routes.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../model/event.dart';
 
@@ -18,6 +20,7 @@ class EventDetails extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     final args = ModalRoute.of(context)!.settings.arguments as Event;
+    var listProvider=Provider.of<EventListProvider>(context);
 
     final event = args;
 
@@ -28,7 +31,7 @@ class EventDetails extends StatelessWidget {
         title: Center(child: Text(AppLocalizations.of(context)!.eventDetails)),
         actions: [
               IconButton(onPressed: (){Navigator.of(context).pushNamed(AppRoutes.editScreen,arguments: event);}, icon: Image.asset(AppImages.edit)),
-              IconButton(onPressed: (){ }, icon: Image.asset(AppImages.delete)),
+              IconButton(onPressed: (){ listProvider.deleteEvent(event); Navigator.pop(context);}, icon: Image.asset(AppImages.delete)),
         ],
       ),
       body: Padding(

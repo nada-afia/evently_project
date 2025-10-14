@@ -86,6 +86,11 @@ class EventListProvider extends  ChangeNotifier{
     notifyListeners();
 
   }
+  void deleteEvent(Event event){
+    FirebaseUtils.getEventCollection().doc(event.id).delete();
+    selectedIndex==0 ? getAllEvents():getFilterEvents();
+    notifyListeners();
+  }
   void changeSelectedIndex(int newSelectedIndex){
     selectedIndex=newSelectedIndex;
     selectedIndex==0 ? getAllEvents():getFilterEvents();
