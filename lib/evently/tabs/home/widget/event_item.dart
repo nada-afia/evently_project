@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_app/model/event.dart';
 import 'package:evently_app/utilts/app_color.dart';
+import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../provider/app_them_provider.dart';
+import '../../../../provider/event_list_provider.dart';
 import '../../../../utilts/app_routes.dart';
 
 class EventItem extends StatelessWidget {
@@ -18,9 +20,11 @@ class EventItem extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var themeProvider=Provider.of<AppThemProvider>(context);
+    var listProvider=Provider.of<EventListProvider>(context);
+
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(AppRoutes.eventDetailsScreen);
+        Navigator.of(context).pushNamed(AppRoutes.eventDetailsScreen,arguments: event);
       },
       child: Container(
         height: height*0.24,
@@ -72,7 +76,13 @@ class EventItem extends StatelessWidget {
                 children: [
                   Text(event.title,style:themeProvider.isDark()?AppStyles.beigeBold14:AppStyles.blackBold14,),
                   Spacer(),
-                  Icon(Icons.favorite,color: AppColors.blue,)
+                  InkWell(
+                    onTap: (){
+                      listProvider.updateFavorite(event);
+                    },
+                      child:  event.isFavorite==true?Image.asset(AppImages.fullHeart):
+                          Image.asset(AppImages.heart)
+                  )
                 ],
               ),
             ),
