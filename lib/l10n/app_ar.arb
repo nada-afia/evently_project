@@ -66,6 +66,7 @@
   "chooseEventLocation": "اختار مكان الفعاليه",
   "weAreGoing": "سنذهب للعب كرة القدم",
   "updateEvent": "تحديث الفعاليه",
-  "noEvent": "لا يوجد فعاليه"
+  "noEvent": "لا يوجد فعاليه",
+  "noFavoriteEventFound": "لم يتم العثور على أي حدث مفضل"
 
 }

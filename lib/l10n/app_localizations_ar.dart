@@ -203,4 +203,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noEvent => 'لا يوجد فعاليه';
+
+  @override
+  String get noFavoriteEventFound => 'لم يتم العثور على أي حدث مفضل';
 }

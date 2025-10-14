@@ -20,11 +20,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  bool isLiked=false;
   @override
   Widget build(BuildContext context) {
-
     var eventListProvider=Provider.of<EventListProvider>(context);
     var themeProvider = Provider.of<AppThemProvider>(context);
     var width = MediaQuery.of(context).size.width;

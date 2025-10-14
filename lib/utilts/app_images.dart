@@ -51,6 +51,9 @@ class AppImages{
   static const String delete ='assets/images/delete.png';
   static const String edit ='assets/images/Edit.png';
   static const String mapDetails ='assets/images/map_details.png';
+  static const String heart ='assets/images/heart.png';
+  static const String fullHeart ='assets/images/full-heart.png';
+
 
 
 }

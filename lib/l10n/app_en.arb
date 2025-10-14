@@ -66,7 +66,8 @@
   "chooseEventLocation": "Choose Event Location",
   "weAreGoing": "We Are Going To Play Football",
   "updateEvent": "Update Event",
-  "noEvent": "No Event Found"
+  "noEvent": "No Event Found",
+  "noFavoriteEventFound": "No Favorite Event Found"
 
 
 }

@@ -481,6 +481,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Event Found'**
   String get noEvent;
+
+  /// No description provided for @noFavoriteEventFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Favorite Event Found'**
+  String get noFavoriteEventFound;
 }
 
 class _AppLocalizationsDelegate
