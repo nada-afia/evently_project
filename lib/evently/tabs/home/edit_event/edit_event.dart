@@ -1,15 +1,17 @@
-import 'package:evently_app/evently/tabs/home/widget/date_or_time.dart';
+import 'package:evently_app/evently/tabs/home/added_event/widget/date_or_time.dart';
 import 'package:evently_app/evently/tabs/home/widget/event_tab.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/provider/event_list_provider.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../provider/app_them_provider.dart';
-import '../../../utilts/app_color.dart';
-import '../../../utilts/app_images.dart';
-import '../../custom_Icon_container.dart';
-import '../../custom_elevated_button.dart';
-import '../../custom_text_field.dart';
+import '../../../../model/event.dart';
+import '../../../../provider/app_them_provider.dart';
+import '../../../../utilts/app_color.dart';
+import '../../../../utilts/app_images.dart';
+import '../../../custom_Icon_container.dart';
+import '../../../custom_elevated_button.dart';
+import '../../../custom_text_field.dart';
 class EditEvent extends StatefulWidget {
   const EditEvent({super.key});
 
@@ -23,11 +25,19 @@ class _EditEventState extends State<EditEvent> {
   String formateDate='';
   TimeOfDay? selectedTime;
   String formateTime='';
+  final titleController = TextEditingController();
+  final descController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+
+    final args = ModalRoute.of(context)?.settings.arguments as Event;
+    final event = args;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var listProvider=Provider.of<EventListProvider>(context);
     var themeProvider=Provider.of<AppThemProvider>(context);
+
     final List<String> eventsName = [
       AppLocalizations.of(context)!.sport,
       AppLocalizations.of(context)!.birthday,
@@ -62,6 +72,14 @@ class _EditEventState extends State<EditEvent> {
       AppImages.holidayDark,
       AppImages.eatingDark
     ];
+    if (titleController.text.isEmpty) {
+      titleController.text = event.title;
+      descController.text = event.description;
+      selectedDate = event.eventDateTime;
+      selectedTime = TimeOfDay.fromDateTime(event.eventDateTime);
+      formateTime = selectedTime!.format(context);
+      selected = eventsName.indexOf(event.eventName);
+    }
     return Scaffold(
       appBar: AppBar(
         titleSpacing: width*0.24 ,
@@ -90,18 +108,18 @@ class _EditEventState extends State<EditEvent> {
                       onTap: (index) {
                         selected=index;
                         setState(() {
-          
+
                         });
                         // Navigator.of(context).pushNamed(AppRoutes.createEventScreen,arguments: selected);
                       },
                       tabs:eventsName.map((eventName) =>
                           EventTab(eventName: eventName, isSelected:selected==eventsName.indexOf(eventName),
                             selectedColor: AppColors.blue, borderColor: AppColors.blue, selectedText:Theme.of(context).textTheme.labelMedium,unSelectedText: AppStyles.blueMed16,),).toList()
-          
+
                   )
               ),
               Text(AppLocalizations.of(context)!.title,style:Theme.of(context).textTheme.titleLarge),
-              CustomTextField(hintText: AppLocalizations.of(context)!.eventTitle,hintStyle: Theme.of(context).textTheme.labelSmall,
+              CustomTextField( controller: titleController, hintText: event.title,hintStyle: Theme.of(context).textTheme.labelSmall,
                 prefixIcon:Image.asset(AppImages.noteEDiting,), validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Please enter a title";
@@ -110,7 +128,7 @@ class _EditEventState extends State<EditEvent> {
                 },),
               SizedBox(height: height*0.02,),
               Text(AppLocalizations.of(context)!.description,style:Theme.of(context).textTheme.titleLarge),
-              CustomTextField(hintText: AppLocalizations.of(context)!.eventDescription,
+              CustomTextField(controller: descController,hintText: event.description,
                 hintStyle:Theme.of(context).textTheme.labelSmall,maxLines: 4, validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Please enter a description";
@@ -133,7 +151,7 @@ class _EditEventState extends State<EditEvent> {
               SizedBox(height: height*0.02,),
               CustomElevatedButton(textButton:AppLocalizations.of(context)!.chooseEventLocation,hasIcon: true,
                   bgColor: AppColors.transparent,
-          
+
                   iconWidget: Row(
                     children: [
                       CustomIconContainer(image: AppImages.locationIcon)
@@ -145,9 +163,29 @@ class _EditEventState extends State<EditEvent> {
                   ),
                   onPressed: (){}),
               SizedBox(height: height*0.02,),
-              CustomElevatedButton(onPressed: (){},textButton: AppLocalizations.of(context)!.updateEvent,)
+              CustomElevatedButton(
+                onPressed: () {
+                    event.title = titleController.text;
+                  event.description = descController.text;
+                  if (selectedDate != null && selectedTime != null) {
+                    event.eventDateTime = DateTime(
+                      selectedDate!.year,
+                      selectedDate!.month,
+                      selectedDate!.day,
+                      selectedTime!.hour,
+                      selectedTime!.minute,
+                    );
+                  }
+                 event.eventName = eventsName[selected];
+                   event.eventImage = imageEvents[selected];
+                  listProvider.updateEventData(event);
+                  Navigator.pop(context);
+                },
+                textButton: AppLocalizations.of(context)!.updateEvent,
+              ),
+
             ],
-          
+
           ),
         ),
       ),

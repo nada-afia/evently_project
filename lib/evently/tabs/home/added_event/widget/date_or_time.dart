@@ -1,5 +1,4 @@
  import 'package:evently_app/utilts/app_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DateOrTime extends StatelessWidget {

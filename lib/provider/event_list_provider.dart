@@ -72,6 +72,20 @@ class EventListProvider extends  ChangeNotifier{
     getAllFavorite();
     notifyListeners();
   }
+  Future<void> updateEventData(Event event) async {
+
+    await FirebaseUtils.getEventCollection()
+        .doc(event.id)
+        .update(event.toFireStore());
+    AppToast.showToastMsg(
+      message: "Event Data Updated Successfully",
+      backgroundColor: Colors.green,
+      textColor: AppColors.white,
+    );
+    selectedIndex == 0 ? await getAllEvents() : await getFilterEvents();
+    notifyListeners();
+
+  }
   void changeSelectedIndex(int newSelectedIndex){
     selectedIndex=newSelectedIndex;
     selectedIndex==0 ? getAllEvents():getFilterEvents();

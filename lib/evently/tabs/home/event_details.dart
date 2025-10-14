@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_app/evently/custom_Icon_container.dart';
 import 'package:evently_app/evently/custom_elevated_button.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
@@ -7,6 +8,8 @@ import 'package:evently_app/utilts/app_routes.dart';
 import 'package:evently_app/utilts/app_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../model/event.dart';
+
 class EventDetails extends StatelessWidget {
   const EventDetails({super.key});
 
@@ -14,6 +17,9 @@ class EventDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    final args = ModalRoute.of(context)!.settings.arguments as Event;
+
+    final event = args;
 
     return Scaffold(
       appBar: AppBar(
@@ -21,8 +27,8 @@ class EventDetails extends StatelessWidget {
 
         title: Center(child: Text(AppLocalizations.of(context)!.eventDetails)),
         actions: [
-              IconButton(onPressed: (){Navigator.of(context).pushNamed(AppRoutes.editScreen);}, icon: Image.asset(AppImages.edit)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppImages.delete)),
+              IconButton(onPressed: (){Navigator.of(context).pushNamed(AppRoutes.editScreen,arguments: event);}, icon: Image.asset(AppImages.edit)),
+              IconButton(onPressed: (){ }, icon: Image.asset(AppImages.delete)),
         ],
       ),
       body: Padding(
@@ -35,11 +41,11 @@ class EventDetails extends StatelessWidget {
               height: height*0.24,
               decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(image: AssetImage( AppImages.birthday),fit: BoxFit.cover)
+            image: DecorationImage(image: AssetImage(event.eventImage),fit: BoxFit.cover)
               ),
             ),
             SizedBox(height: height*0.01,),
-            Text(AppLocalizations.of(context)!.weAreGoing,style: AppStyles.blueMed24,),
+            Text(event.title,style: AppStyles.blueMed24,),
             SizedBox(height: height*0.01,),
             CustomElevatedButton(onPressed: (){}
               ,hasIcon: true,bgColor: AppColors.transparent,
@@ -50,8 +56,8 @@ class EventDetails extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("21 November 2024",style: AppStyles.blueMed16,),
-                      Text("12:12PM",style: Theme.of(context).textTheme.titleLarge,)
+                      Text("${event.eventDateTime.day} ${DateFormat('MMMM').format(event.eventDateTime)} ${event.eventDateTime.year}",style: AppStyles.blueMed16,),
+                      Text(event.eventTime,style: Theme.of(context).textTheme.titleLarge,)
                     ],
                   )
                 ],
@@ -90,7 +96,7 @@ class EventDetails extends StatelessWidget {
               children: [
               Text(AppLocalizations.of(context)!.description,style:Theme.of(context).textTheme.titleLarge ,),
              SizedBox(height: height*0.01,),
-             Text("Lorem ipsum dolor sit amet consectetur. Vulputate eleifend suscipit eget neque senectus a. Nulla at non malesuada odio duis lectus amet nisi sit. Risus hac enim maecenas auctor et. At cras massa diam porta facilisi lacus purus. Iaculis eget quis ut amet. Sit ac malesuada nisi quis  feugiat.",style: Theme.of(context).textTheme.titleLarge,) ]
+             Text( event.description,style: Theme.of(context).textTheme.titleLarge,) ]
               ,)
           ],
           ),

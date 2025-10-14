@@ -1,18 +1,19 @@
 import 'package:evently_app/evently/custom_Icon_container.dart';
 import 'package:evently_app/evently/custom_elevated_button.dart';
 import 'package:evently_app/evently/custom_text_field.dart';
-import 'package:evently_app/evently/tabs/home/widget/date_or_time.dart';
+import 'package:evently_app/evently/tabs/home/added_event/widget/date_or_time.dart';
 import 'package:evently_app/firebase_utils.dart';
 import 'package:evently_app/model/event.dart';
 import 'package:evently_app/provider/app_them_provider.dart';
 import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
+import 'package:evently_app/utilts/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../l10n/app_localizations.dart';
-import '../../../provider/event_list_provider.dart';
-import '../../../utilts/app_styles.dart';
-import 'widget/event_tab.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../provider/event_list_provider.dart';
+import '../../../../utilts/app_styles.dart';
+import '../widget/event_tab.dart';
 
 class CreateEvent extends StatefulWidget {
   const CreateEvent({super.key});
@@ -23,8 +24,8 @@ class CreateEvent extends StatefulWidget {
 
 class _CreateEventState extends State<CreateEvent> {
   int selected=0;
-  String selectedEventName='';
-  String selectedEventImage='';
+  String selectedEventName='sport';
+  String selectedEventImage=AppImages.sport;
   DateTime?selectedDate;
   String formateDate='';
   TimeOfDay? selectedTime;
@@ -55,6 +56,7 @@ class _CreateEventState extends State<CreateEvent> {
     AppImages.eatingDark
   ];
   late EventListProvider eventListProvider;
+
   @override
   Widget build(BuildContext context) {
      eventListProvider=Provider.of<EventListProvider>(context);
@@ -211,8 +213,9 @@ class _CreateEventState extends State<CreateEvent> {
       );
        FirebaseUtils.addEventToFIreStore(newEvent).timeout(Duration(seconds: 1)
        ,onTimeout: (){
-              print('data');
-              eventListProvider.getAllEvents();
+             AppToast.showToastMsg(message: "Event added successfully", backgroundColor: AppColors.blue, textColor: AppColors.white);
+             //eventListProvider.getAllEvents();
+             //  eventListProvider.changeSelectedIndex(0);
               Navigator.pop(context);
            }
        );
