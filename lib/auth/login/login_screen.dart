@@ -7,6 +7,7 @@ import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../utilts/alert-dialog.dart';
 import '../../utilts/app_styles.dart';
 
@@ -121,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: height*0.02,),
                   CustomElevatedButton(
                     bgColor: AppColors.transparent,
-                    onPressed: () {  },
+                    onPressed:signInWithGoogle,
                     hasIcon: true,
                     iconWidget:Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -177,4 +178,69 @@ class _LoginScreenState extends State<LoginScreen> {
 
     }
   }
+
+  Future<void> signInWithGoogle() async {
+    DialogUtils.showLoading(context: context, message: 'Signing in...');
+
+    try {
+      await GoogleSignIn().signOut();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          title: 'Operation Cancelled',
+          message: 'Google sign-in was cancelled',
+          posActionName: 'OK',
+        );
+        return;
+      }
+
+      final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
+
+      if (googleAuth?.idToken == null || googleAuth?.accessToken == null) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          title: ' Error',
+          message: 'Failed to retrieve authentication details',
+          posActionName: 'OK',
+        );
+        return;
+      }
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      DialogUtils.hideLoading(context: context);
+       DialogUtils.showMessage(
+        context: context,
+        message: 'Login successfully',
+        title: 'Success',
+        posActionName: 'OK',
+         posAction: (){
+           Navigator.of(context).pushReplacementNamed(
+             AppRoutes.mainScreen,
+             arguments: FirebaseAuth.instance.currentUser?.email,
+           );
+         }
+      );
+
+    } catch (e) {
+      DialogUtils.hideLoading(context: context);
+      DialogUtils.showMessage(
+        context: context,
+        title: 'Unexpected Error',
+        message: 'An error occurred during Google sign-in',
+        posActionName: 'OK',
+      );
+    }
+  }
+
+
 }
