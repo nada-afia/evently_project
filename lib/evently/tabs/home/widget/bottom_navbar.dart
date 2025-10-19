@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var themeProvider=Provider.of<AppThemProvider>(context);
-    var controller = ModalRoute.of(context)!.settings.arguments as String;
+    var controller =  ModalRoute.of(context)!.settings.arguments as String;
     final List<Widget> screens = [
       HomeScreen(name: controller,),
       MapScreen(),

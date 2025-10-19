@@ -5,7 +5,9 @@ import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/utilts/app_color.dart';
 import 'package:evently_app/utilts/app_images.dart';
 import 'package:evently_app/utilts/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../utilts/alert-dialog.dart';
 import '../../utilts/app_styles.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +20,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey=GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: height*0.02,),
                       CustomTextField(hintText: AppLocalizations.of(context)!.password,
+                        controller: passController,
                         prefixIcon: Image.asset(AppImages.password ),
                         suffixIcon: Image.asset(AppImages.hide),
                         validator: (text) {
@@ -135,9 +140,41 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  void login() {
+  Future<void> login() async {
     if(_formKey.currentState?.validate()==true){
-     Navigator.of(context).pushNamed(AppRoutes.mainScreen,arguments: emailController.text);
+      DialogUtils.showLoading(context: context, message: 'Loading...');
+      try {
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passController.text
+
+        );
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context, message: 'Register successfully',
+            title: "success",
+            posActionName: "ok",
+            posAction: (){
+              Navigator.of(context).pushNamed(AppRoutes.mainScreen,arguments: emailController.text);
+            }
+        );
+       }
+      on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-credential') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(context: context, message: 'The supplied auth credential is incorrect, malformed or has expired.',
+              title: "Error",
+              posActionName: "ok",
+          );
+        }
+      }
+      catch(e){
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context, message: 'The supplied auth credential is incorrect, malformed or has expired.',
+          title: "Error",
+          posActionName: "ok",
+        );
+      }
+
     }
   }
 }
